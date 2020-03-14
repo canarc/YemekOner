@@ -3,10 +3,15 @@
  */
 
 import React, {Component} from 'react';
-import Main from './src/view/Main';
 import {Router, Stack, Scene} from 'react-native-router-flux';
 import {store} from './src/redux/store';
 import {Provider} from 'react-redux';
+
+//Screens
+import TabRouter from './src/view/TabRouter';
+import Login from './src/view/Login';
+import Home from './src/view/Home';
+import FirstLogin from './src/view/FirstLogin';
 
 class App extends Component {
   render() {
@@ -14,7 +19,10 @@ class App extends Component {
       <Provider store={store}>
         <Router>
           <Stack key="root">
-            <Scene key="main" component={Main} />
+            <Scene key="firstLoginScreen" hideNavBar component={FirstLogin} />
+            <Scene key="loginScreen" hideNavBar component={Login} />
+            <Scene key="tabRouter" hideNavBar component={TabRouter} />
+            <Scene key="homeScreen" hideNavBar component={Home} />
           </Stack>
         </Router>
       </Provider>
