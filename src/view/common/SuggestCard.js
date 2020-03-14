@@ -35,8 +35,8 @@ export default class SuggestCard extends Component {
     console.log(this.props.data.index);
     return (
       <Animated.View
-        style={
-          ({
+        style={[
+          {
             borderRadius: 5,
             width: hp(35),
             height: hp(28),
@@ -53,8 +53,8 @@ export default class SuggestCard extends Component {
             shadowRadius: 4.65,
             elevation: 7,
           },
-          this.props.style)
-        }>
+          this.props.style,
+        ]}>
         <Image
           style={{
             borderTopLeftRadius: 5,
