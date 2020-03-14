@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Text, View, SafeAreaView, Animated} from 'react-native';
 import {fontSize, hp, wp} from '../helper/sizeHelper';
+import {Actions} from 'react-native-router-flux';
 import {Easing} from 'react-native-reanimated';
 import {COLORS} from '../common/constants';
 import SuggestCard from './common/SuggestCard';
@@ -83,7 +84,7 @@ export default class FirstLogin extends Component {
         {this.state.textAnimationFinished ? (
           this.state.surveyFinished ? (
             <Animated.View style={{opacity: this.state.loadingOpacity}}>
-              <Animated.Text
+              <Text
                 style={{
                   marginTop: hp(50),
                   transform: [{translateY: -50}],
@@ -93,10 +94,14 @@ export default class FirstLogin extends Component {
                   fontSize: fontSize(7),
                 }}>
                 Önerileriniz kişiselleştiriliyor
-              </Animated.Text>
+              </Text>
             </Animated.View>
           ) : (
-            <Animated.View style={{opacity: this.state.surveyOpacity}}>
+            <Animated.View
+              flex={1}
+              style={{
+                opacity: this.state.surveyOpacity,
+              }}>
               <Text
                 style={{
                   marginTop: hp(10),
@@ -107,33 +112,39 @@ export default class FirstLogin extends Component {
                 }}>
                 Bunu beğendin mi?
               </Text>
-              <View>
-                <Swiper
-                  cards={['DO', 'MORE', 'OF', 'WHAT', 'MAKES']}
-                  renderCard={card => {
-                    return <SurveyCard />;
-                  }}
-                  onSwiped={cardIndex => {
-                    console.log(cardIndex);
-                  }}
-                  onSwipedAll={() => {
-                    Animated.timing(this.state.surveyOpacity, {
-                      toValue: 0,
+              <Swiper
+                containerStyle={{
+                  marginTop: hp(10),
+                  height: hp(80),
+                  flex: 1,
+                }}
+                cards={['DO', 'MORE', 'OF', 'WHAT', 'MAKES']}
+                renderCard={card => {
+                  return <SurveyCard />;
+                }}
+                onSwiped={cardIndex => {
+                  console.log(cardIndex);
+                }}
+                onSwipedAll={() => {
+                  Animated.timing(this.state.surveyOpacity, {
+                    toValue: 0,
+                    duration: 1000,
+                  }).start(() => {
+                    this.setState({surveyFinished: true});
+                    Animated.timing(this.state.loadingOpacity, {
+                      toValue: 1,
                       duration: 1000,
-                    }).start(() => {
-                      this.setState({surveyFinished: true});
-                      Animated.timing(this.state.loadingOpacity, {
-                        toValue: 1,
-                        duration: 1000,
-                      }).start();
-                    });
-                  }}
-                  cardIndex={0}
-                  backgroundColor="none"
-                  stackSeparation={2}
-                  stackSize={2}
-                />
-              </View>
+                    }).start();
+                    setTimeout(() => {
+                      Actions.tabRouter();
+                    }, 2000);
+                  });
+                }}
+                cardIndex={0}
+                backgroundColor="none"
+                stackSeparation={2}
+                stackSize={2}
+              />
             </Animated.View>
           )
         ) : (

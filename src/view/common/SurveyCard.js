@@ -40,19 +40,19 @@ export default class SurveyCard extends Component {
           style={[
             {
               marginTop: hp(5),
-              borderRadius: 10,
               width: wp(90),
-              height: hp(50),
+              borderRadius: 25,
+              height: hp(65),
               backgroundColor: 'white',
             },
             styles.shadowStyles,
           ]}>
           <Image
             style={{
-              borderTopLeftRadius: 10,
-              borderTopRightRadius: 10,
+              borderTopLeftRadius: 25,
+              borderTopRightRadius: 25,
               width: '100%',
-              height: '70%',
+              height: '80%',
               resizeMode: 'cover',
             }}
             source={{
@@ -60,25 +60,31 @@ export default class SurveyCard extends Component {
                 'http://www.isosdoner.com/wp-content/uploads/2017/09/fuze-tavuk-durum.jpg',
             }}
           />
-          <Text
+          <View
             style={{
-              marginTop: wp(2),
-              marginLeft: wp(5),
-              fontFamily: 'Avenir',
-              fontSize: fontSize(5),
-              color: 'black',
+              height: '20%',
+              justifyContent: 'center',
             }}>
-            İsos Döner
-          </Text>
-          <Text
-            style={{
-              marginLeft: wp(5),
-              fontFamily: 'Avenir',
-              fontSize: fontSize(4),
-              color: COLORS[4],
-            }}>
-            Füze Tavuk Dürüm
-          </Text>
+            <Text
+              style={{
+                fontWeight: 'bold',
+                marginLeft: wp(10),
+                fontFamily: 'Avenir',
+                fontSize: fontSize(5),
+                color: 'black',
+              }}>
+              İsos Döner
+            </Text>
+            <Text
+              style={{
+                marginLeft: wp(10),
+                fontFamily: 'Avenir',
+                fontSize: fontSize(4),
+                color: COLORS[4],
+              }}>
+              Füze Tavuk Dürüm
+            </Text>
+          </View>
         </Animated.View>
       </Animated.View>
     );
@@ -89,9 +95,9 @@ const styles = {
   shadowStyles: {
     shadowColor: '#000',
     shadowOffset: {width: 0, height: 2},
-    shadowOpacity: 0.4,
+    shadowOpacity: 0.2,
     shadowRadius: 2,
-    elevation: 1,
+    elevation: 25,
   },
   circleButtonStyle: {
     alignItems: 'center',
