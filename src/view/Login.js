@@ -65,7 +65,7 @@ export default class Login extends Component {
           <Button
             buttonStyle={{backgroundColor: '#0f4c81'}}
             title="Giriş Yap"
-            onPress={() => Actions.tabRouter()}
+            onPress={() => Actions.firstLoginScreen()}
             containerStyle={{
               width: '70%',
               alignSelf: 'center',

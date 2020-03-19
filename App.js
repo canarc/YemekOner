@@ -19,8 +19,8 @@ class App extends Component {
       <Provider store={store}>
         <Router>
           <Stack key="root">
-            <Scene key="firstLoginScreen" hideNavBar component={FirstLogin} />
             <Scene key="loginScreen" hideNavBar component={Login} />
+            <Scene key="firstLoginScreen" hideNavBar component={FirstLogin} />
             <Scene key="tabRouter" hideNavBar component={TabRouter} />
             <Scene key="homeScreen" hideNavBar component={Home} />
           </Stack>
