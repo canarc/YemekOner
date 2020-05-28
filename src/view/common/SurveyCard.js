@@ -1,48 +1,32 @@
 import React, {Component} from 'react';
-import {View, Image, Text, Animated, Button} from 'react-native';
+import {
+  View,
+  Image,
+  Text,
+  Animated,
+  Button,
+  TouchableOpacity,
+} from 'react-native';
 import {hp, wp, fontSize} from '../../helper/sizeHelper';
 import {COLORS} from '../../common/constants';
-import {ButtonGroup, Icon} from 'react-native-elements';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import {ButtonGroup, Icon, AirbnbRating} from 'react-native-elements';
 
 export default class SurveyCard extends Component {
-  likeIcon = () => (
-    <Icon
-      size={fontSize(6)}
-      color="#305644"
-      name="thumbs-up"
-      type="font-awesome"
-    />
-  );
-
-  dislikeIcon = () => (
-    <Icon
-      size={fontSize(6)}
-      color="#A64444"
-      name="thumbs-down"
-      type="font-awesome"
-    />
-  );
-
-  updateIndex = index => {
-    if (index == 0) {
-      console.log('Axios.like');
-    } else {
-      console.log('Axios.dislike');
-    }
-    this.props.removeSelf(this.props.data.index);
-  };
-
   render() {
     return (
-      <Animated.View flex={1} style={{alignItems: 'center'}}>
+      <Animated.View
+        flex={1}
+        style={{
+          alignItems: 'center',
+          width: wp(100),
+        }}>
         <Animated.View
           style={[
             {
               marginTop: hp(5),
               width: wp(90),
               borderRadius: 25,
-              height: hp(65),
+              height: hp(70),
               backgroundColor: 'white',
             },
             styles.shadowStyles,
@@ -52,12 +36,11 @@ export default class SurveyCard extends Component {
               borderTopLeftRadius: 25,
               borderTopRightRadius: 25,
               width: '100%',
-              height: '80%',
+              height: '60%',
               resizeMode: 'cover',
             }}
             source={{
-              uri:
-                'http://www.isosdoner.com/wp-content/uploads/2017/09/fuze-tavuk-durum.jpg',
+              uri: this.props.card.meal_image,
             }}
           />
           <View
@@ -73,7 +56,7 @@ export default class SurveyCard extends Component {
                 fontSize: fontSize(5),
                 color: 'black',
               }}>
-              İsos Döner
+              {this.props.card.restaurant.restaurant_name}
             </Text>
             <Text
               style={{
@@ -82,9 +65,19 @@ export default class SurveyCard extends Component {
                 fontSize: fontSize(4),
                 color: COLORS[4],
               }}>
-              Füze Tavuk Dürüm
+              {this.props.card.meal_name}
             </Text>
           </View>
+          <AirbnbRating
+            reviews={['Berbat', 'Kötü', 'Eh', 'İyi', 'Çok İyi']}
+            startingValue={1}
+            defaultRating={0}
+            ratingCount={5}
+            imageSize={fontSize(5)}
+            onFinishRating={rating =>
+              this.props.onRate(rating, this.props.card.id)
+            }
+          />
         </Animated.View>
       </Animated.View>
     );

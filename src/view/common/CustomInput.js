@@ -18,9 +18,6 @@ export default class CustomInput extends Component {
               ? this.props.inputStyle
               : {marginLeft: 10, fontSize: 15}
           }
-          placeholder={
-            this.props.placeholder ? this.props.placeholder : 'placeholder'
-          }
           {...this.props}
         />
       </SafeAreaView>

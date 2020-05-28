@@ -2,7 +2,11 @@ platform :ios, '9.0'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
 target 'YemekOner' do
+  permissions_path = '../node_modules/react-native-permissions/ios'
+
   # Pods for YemekOner
+  pod 'Permission-Camera', :path => "#{permissions_path}/Camera.podspec"
+
   pod 'FBLazyVector', :path => "../node_modules/react-native/Libraries/FBLazyVector"
   pod 'FBReactNativeSpec', :path => "../node_modules/react-native/Libraries/FBReactNativeSpec"
   pod 'RCTRequired', :path => "../node_modules/react-native/Libraries/RCTRequired"
@@ -33,6 +37,7 @@ target 'YemekOner' do
   pod 'DoubleConversion', :podspec => '../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec'
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
+
 
   target 'YemekOnerTests' do
     inherit! :search_paths

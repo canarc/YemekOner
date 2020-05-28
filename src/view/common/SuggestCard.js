@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import {View, Image, Text, Animated} from 'react-native';
+import {View, Image, Text, Animated, ImageBackground} from 'react-native';
 import {hp, wp, fontSize} from '../../helper/sizeHelper';
 import {COLORS} from '../../common/constants';
-import {ButtonGroup, Icon} from 'react-native-elements';
+import {Button, Icon} from 'react-native-elements';
 
 export default class SuggestCard extends Component {
   likeIcon = () => (
@@ -15,7 +15,7 @@ export default class SuggestCard extends Component {
   );
   dislikeIcon = () => (
     <Icon
-      size={fontSize(6)}
+      size={fontSize(8)}
       color="#A64444"
       name="thumbs-down"
       type="font-awesome"
@@ -28,18 +28,17 @@ export default class SuggestCard extends Component {
     } else {
       console.log('Axios.dislike');
     }
-    this.props.removeSelf(this.props.data.index);
+    this.props.removeSelf(this.props.data.index, this.props.data.item.id);
   };
 
   render() {
-    console.log(this.props.data.index);
     return (
       <Animated.View
         style={[
           {
             borderRadius: 5,
             width: hp(35),
-            height: hp(28),
+            height: hp(23),
             marginTop: hp(1),
             marginRight: wp(2.5),
             marginLeft: wp(2.5),
@@ -55,16 +54,32 @@ export default class SuggestCard extends Component {
           },
           this.props.style,
         ]}>
-        <Image
-          style={{
-            borderTopLeftRadius: 5,
-            borderTopRightRadius: 5,
-            width: '100%',
-            height: '50%',
-            resizeMode: 'cover',
-          }}
-          source={{uri: this.props.data.item.image}}
-        />
+        <View style={{width: '100%', height: '70%'}}>
+          <Image
+            style={{
+              position: 'absolute',
+              borderTopLeftRadius: 5,
+              borderTopRightRadius: 5,
+              width: '100%',
+              height: '100%',
+              resizeMode: 'cover',
+            }}
+            source={{uri: this.props.data.item.meal_image}}
+          />
+          <Button
+            onPress={this.updateIndex}
+            icon={this.dislikeIcon}
+            type="clear"
+            style={{
+              position: 'absolute',
+              top: 0,
+              right: 0,
+              width: 50,
+              height: 50,
+            }}
+          />
+        </View>
+
         <Text
           style={{
             marginTop: wp(2),
@@ -73,7 +88,7 @@ export default class SuggestCard extends Component {
             fontSize: fontSize(5),
             color: 'black',
           }}>
-          {this.props.data.item.name}
+          {this.props.data.item.restaurant.restaurant_name}
         </Text>
         <Text
           style={{
@@ -82,13 +97,8 @@ export default class SuggestCard extends Component {
             fontSize: fontSize(4),
             color: COLORS[4],
           }}>
-          {this.props.data.item.meal}
+          {this.props.data.item.meal_name}
         </Text>
-        <ButtonGroup
-          onPress={this.updateIndex}
-          buttons={[{element: this.likeIcon}, {element: this.dislikeIcon}]}
-          containerStyle={{height: '20%'}}
-        />
       </Animated.View>
     );
   }
